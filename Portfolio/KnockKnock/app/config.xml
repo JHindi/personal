@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = ".MadainCorp.Assessor"
+    versionCode="10"
+    version   = "1.0.0">
+
+  <!-- versionCode is optional and Android only -->
+
+  <name>Assessor</name>
+
+  <description>
+    OSPP
+  </description>
+
+  <author href="http://madaincorp.com" email="support@madaincorp.com">
+    Madain Corp Team
+  </author>
+  <access origin="*" />
+  <preference name="phonegap-version" value="2.5.0" />
+  
+  <preference name="stay-in-webview" value="false" />
+  <preference name="webviewbounce" value="false" />
+  
+  <preference name="orientation" value="landscape" />
+  <preference name="target-device" value="universal" />
+  <preference name="fullscreen" value="true" />
+  
+  <preference name="show-splash-screen-spinner" value="false" />
+  <preference name="splash-screen-duration" value="3000" />  
+  <gap:splash src="img/Splash_ipad.png" gap:platform="ios" width="1024" height="768" />
+  <gap:splash src="img/Splash_ipad_portrait.png" gap:platform="ios" width="768" height="1024" />
+  <gap:splash src="img/Splash_ipad@2x.png" gap:platform="ios"  width="2048" height="1536" />
+  <gap:splash src="img/Splash_ipad_portrait@2x.png" gap:platform="ios" width="1536" height="2048" />
+  
+  <icon src="img/Icon.png" />
+
+</widget>

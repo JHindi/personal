@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Assessor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/Assessor.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.0.min.css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.3.0.min.js"></script>
+    <!--
+    <script type="text/javascript" src="js/jspdf.js"></script>
+    <script type="text/javascript" src="js/html2canvas.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        -->
+
+    
+
+    <script>
+        function createDelegate(object, method) {
+            var shim = function () {
+                return method.apply(object, arguments);
+            }
+            return shim;
+        }
+
+        function toggleQuestions(h2) {
+            var qlist = $(h2.parentNode).children('.QuestionsList:first');
+            $('.QuestionsList').each(function (i, e) {
+                if (e != qlist[0]) $(e).hide();
+            });
+            qlist.toggle();
+        }
+    </script>
+
+</head>
+<body data-default-target-id="Page">
+    <div id="Page" data-role="page">
+        <div id="ToolBar">
+            <ul class="nav">
+                <li id="liHome" class="tab">
+                    <img src="img/Toolbar/ic_home.png" alt="Home" /></li>
+                <li id="liQuestions" class="tab">
+                    <img src="img/Toolbar/ic_questions.png" alt="Questions" /></li>
+                <li id="liReport" class="tab">
+                    <img src="img/Toolbar/ic_report.png" alt="Report" /></li>
+                <li id="liAbout" class="tab">
+                    <img src="img/Toolbar/ic_about.png" alt="About Us" /></li>
+            </ul>
+            <div id="divMSGSelectCompany" style="display: none;" data-rel="popup">Test</div>
+        </div>
+
+        <div id="divSelectACompanyAlert" style="display: none;">
+            Please select a company first            
+        </div>
+
+        <div id="tabHome" data-role="content" class="FakePage" data-theme="a">
+            <div id="CompanyContainer" class="SideBar">
+                <div id="CompanyHeader" class="pageTitle">
+                    <h1>Companies</h1>
+                </div>
+
+                <!-- Mastr Template -->
+                <li class="CompanyReport MasterTemplate">
+
+                    <img class="arrow-right" src="img/ic_arrow_right.png" />
+                    <div class="CategoryNumber">00</div>
+                    <div class="CategoryDiscription">
+                        <h2 class="CompanyName"></h2>
+                        Created On <span class="CompanyCreatedOn"></span>
+                        <br />
+                        Updated On<span class="CompanyLastModified ui-li-count"></span>
+                        <div class="CompanyDescription"></div>
+                    </div>
+
+                </li>
+                <!--  -->
+
+                <ul id="ulCompanies" style="overflow: auto;">
+                </ul>
+
+
+                <a href="#popupNewCompany" data-role="button" data-inline="true" data-rel="popup" data-position-to="window" style="width: 95%;">New Company</a>
+
+                <div data-role="popup" id="popupMenu" data-theme="a" style="display: none">
+                    <div data-role="popup" id="popupNewCompany" data-theme="a" class="ui-corner-all">
+                        <div style="padding: 10px 20px;">
+                            <h3>Add a New Company Profile</h3>
+                            Company Name:
+                                <input type="text" id="txtCompanyName" placeholder="Company Name" data-theme="a" />
+
+                            <button id="btnNewCompany">Add Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!------Questions Tab-------------->
+        <div id="tabQuestions" data-role="content" class="FakePage" data-theme="a">
+            <table>
+                <tr>
+
+                    <td class="Categories SideBar">
+
+                        <div class="pageTitle">
+                            <h1 class="CompanyName">Company Name</h1>
+                        </div>
+                        <ul id="ulCategories" data-inset="true" data-theme="b" style="overflow: auto;">
+                        </ul>
+
+                        <!----Category Template----------------->
+                        <li class="Category MasterTempate" style="display: none; width: 99%">
+                            <img class="arrow-right" src="img/ic_arrow_right.png" />
+                            <div class="CategoryNumber">00</div>
+                            <div class="CategoryContent">
+                                <h2 class="CategoryTitle">CategoryTitle</h2>
+                                <div class="CategoryDescription">CategoryDescription</div>
+                            </div>
+
+                        </li>
+
+                    </td>
+                    <td class="Questions">
+                        <ul id="ulSubCategories" style="overflow: auto;">
+                        </ul>
+
+                        <!---SubCategory Template----->
+                        <li class="SubCategory MasterTemplate">
+                            <h2 class="SubCategoryTitle" onclick="toggleQuestions(this);"></h2>
+
+                            <ul class="QuestionsList MasterTemplate" style="display: none;">
+                            </ul>
+                        </li>
+                        <script>
+                            function setQValue(element, value) {
+
+                                $(element).parent().parent().find('.QuestionSlider:first').val(value).slider('refresh');;
+                            }
+                        </script>
+                        <!---------Question Template---------------------------------->
+                        <li class="Question MasterTemplate">
+                            <div class="QuestionText">1. Question</div>
+                            <div class="AnswerOptions">
+                                <div class="AnswerOption">Very Low</div>
+                                <div class="AnswerOption">Low</div>
+                                <div class="AnswerOption">OK</div>
+                                <div class="AnswerOption">High</div>
+                                <div class="AnswerOption">Very High</div>
+                            </div>
+                            <input class="QuestionSlider" type="range" data-highlight="true" name="slider-10" id="Range3" min="1" max="5" step=".05" value="1" />
+                        </li>
+                        <!------------------------------------------------------------->
+
+
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <!------Reports Tab-------------->
+        <div id="tabReport" data-role="content" class="FakePage" data-theme="a">
+
+            <div class="SubCategoryTitle ReportTitle">
+                <h1>Company Name Assessment</h1>
+            </div>
+
+            <table class="reportSummary">
+                <tr>
+                    <td class="ReportSideBar">
+                        <table>
+                            <tr>
+                                <td><b>Components Gap and Closing Costs</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="subMacro_Environmental_Assessment">
+                                <td>Environmental Turbelance Level</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ReportSideBar">
+                        <table>
+                            <tr>
+                                <td><b>Strategic Components</b></td>
+                                <td><b></b></td>
+                                <td><b>Component Gaps</b></td>
+                                <td></td>
+                            </tr>
+                            <tr class="subINNOVATION_AGGRESSIVENESS">
+                                <td>Innovation Aggressivness</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subMARKETING_AGGRESSIVENESS">
+                                <td>Marketing Aggressivness</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="frmFirmsAggressivness">
+                                <td>Firms Aggressivness Level</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr class="frmStrategicAggressivness">
+                                <td>Strategic Aggressivness Gap</td>
+                                <td></td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ReportSideBar">
+                        <table>
+                            <tr>
+                                <td><b>General Management Capability</b></td>
+                                <td><b></b></td>
+                                <td><b>Component Gaps</b></td>
+                                <td></td>
+                            </tr>
+                            <tr class="subGENERAL_MANAGERS">
+                                <td>Managers</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subCULTURE">
+                                <td>Culture</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subSTRUCTURE">
+                                <td>Structure</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subSYSTEMS">
+                                <td>Systems</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subMANAGEMENT_TECHNOLOGY">
+                                <td>Technology</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="subMANAGEMENT_CAPACITY">
+                                <td>Capacity</td>
+                                <td class="AVG">0.00</td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                            <tr class="frmFirmCapabilityResponsivness">
+                                <td>Firm Capability Responsivness</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr class="frmCapabilityResponsivnessGap">
+                                <td>Capability Responsivness Gap</td>
+                                <td></td>
+                                <td class="GAP">0.00</td>
+                                <td>
+                                    <div class="GapIcon redGap"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ReportSideBar">
+                        <table>
+                            <tr class="frmStrategicPosture">
+                                <td>Strategic Posture</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="frmStrategicBudget">
+                                <td>Strategic Budget</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="frmFutureCompetitivePosition">
+                                <td>Firm's Future Competitive Position</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="frmFutureIndustryProspects">
+                                <td>Future Industry Prospects</td>
+                                <td class="AVG">0.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+            <div class="ReportInfo">
+                <p>
+                    The results from the matrix variables illustrate the firm's Center of Gravity (COG). The COG is the firm's 
+                    performance position relative to optimal performance. Optimal performance on the matrix is achieved by 
+                    positioning the COG in the highest proximity to the top right corner of the matrix. <i class="note">(Note: managers must 
+                    consider that industries and industry conditions vary, and as such, what may be the optimal position for one 
+                    industry, may be different for another industry.)</i>
+                </p>
+                <div id="chart_div"></div>
+
+                <button class="btnGeneratePDF">Send Assessment</button>
+
+                <!--<a class="EmailPDF" href="#">Send PDF</a>-->
+            </div>
+        </div>
+
+
+        <!------About Us Tab-------------->
+        <div id="tabAbout" data-role="content" class="FakePage" data-theme="a">
+
+            <div class="SubCategoryTitle ReportTitle">
+                <h1>Company Name Assessment</h1>
+            </div>
+
+            <div class="aboutInfo">
+                <h3>Dan Kipley, DBA</h3>
+                <p>
+                    Associate Professor of Strategic Management at Azusa Pacific University. Primary research interests are 
+                    Ansoffian based and focus on For-profit and Not-for-profit strategy and strategic optimization. Extensively 
+                    published in scholarly journals and has published numerous textbooks on Strategic Management. 
+                </p>
+
+                <h3>Alfred O. Lewis, DBA</h3>
+                <p>
+                    An award winning instructor of finance, international business, and strategic management, receiving accolades 
+                    at the undergraduate, masters, and doctoral levels. Studied under the Founding Father of Strategic Management,
+                     Professor H. I. Ansoff. He has published numerous books and articles in the field of banking, 
+                    entrepreneurship, Not-for-Profit management, law, international business, and Strategic Management. Also 
+                    serves on numerous editorial boards and is editor of the Journal of Business Strategy Series published be 
+                    Emerald in the United Kingdom and the Associate Editor of the British Journal of Management and Economics. 
+                </p>
+
+                <h3>Interpreting the Enunciator Panel</h3>
+                <p>
+                    The OSPP is both a descriptive and prescriptive analysis tool. Managers can now assess which area(s) of the 
+                    firm to concentrate it resources to improve its performance position. The enunciator panel indicates a green 
+                    or red signal. Green indicates that the gap between the ETL and the assessed capability is within tolerance. 
+                    Red indicates the gap between the ETL and the assessed capability is excessive, contributing to poor 
+                    performance. Management now has the option to increase, modify, and replace the low performing descriptor 
+                    factors to increase the score. As management moves through the various assessment screens making 
+                    modifications, the OSPP matrix with reflect those management choices, thus adding to management's 
+                    understanding of the relationship of the variables and descriptors affecting them.
+                </p>
+
+
+            </div>
+        </div>
+
+        <!--<div data-role="footer"  data-position="fixed">Footer</div>-->
+
+
+    </div>
+    <script type="text/javascript" src="js/homePage.js"></script>
+    <script type="text/javascript" src="js/Company.js"></script>
+    <script type="text/javascript" src="js/CompanyStore.js"></script>
+    <script type="text/javascript" src="js/Questionnaire.js"></script>
+    <script type="text/javascript" src="js/questionnairePage.js"></script>
+    <script type="text/javascript" src="js/reportPage.js"></script>
+    <script type="text/javascript" src="js/Context.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>    
+    <script type="text/javascript" src="cordova-2.6.0.js"></script>
+
+    <!--<script src="http://debug.phonegap.com/target/target-script-min.js#KApps"></script> -->
+
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });        
+    </script>
+</body>
+</html>

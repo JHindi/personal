@@ -1,0 +1,718 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+*
+{
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-user-select: text; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+body
+{
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif !important;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1.6875;
+    overflow:hidden;
+}
+
+
+@media only screen and (max-width: 962px)
+{
+    body
+    {
+        font-size: 80%;
+    }
+}
+
+td {
+    padding:0px;
+    margin:0px;
+}
+
+#ToolBar
+{
+    border-right: 1px gray solid;
+    float: left;
+    background: white;
+    text-align: center;
+    width: 5%;
+    max-width: 105px;
+    height: 100%;
+    line-height: 0px !important;
+    vertical-align: middle;
+    z-index: 20;
+}
+
+h3
+{
+    font-size: large;
+    font-weight: bold;
+    color: #2d353a;
+    line-height: 2em;
+    margin-top: 15px;
+}
+
+#ToolBar img
+{
+    width: 46%;
+    max-width: 44px;
+    height: auto;
+    position: relative;
+    top: 25%;
+}
+
+#ToolBar li:hover
+{
+    background-color: #9ac9d8;
+}
+
+ul.nav
+{
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+    ul.nav li
+    {
+        width: 100%;
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid #cecece;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+        ul.nav li:active, .sel
+        {
+            background-color: #9ac9d8;
+        }
+
+
+/* Portrait layout (default) */
+.app
+{
+    position: absolute; /* position in the center of the screen */
+    text-align: center;
+    height: 100%;
+    top: 0px;
+    padding: 15px;
+    width: 90%;
+}
+
+
+#divText
+{
+    height: 70%;
+    font-size: 1.8em;
+    padding-top: 30%;
+}
+
+#divNext
+{
+    font-size: 2.1em;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    color: #F9FF60;
+}
+
+#divBG
+{
+    background-color: black;
+    opacity: 0.3;
+    height: 100%;
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px)
+{
+    .app
+    {
+    }
+}
+
+h1
+{
+    font-size: 2.25em !important;
+    font-weight: normal;
+    margin: 0px;
+    margin-bottom: 20px;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
+}
+
+#divText
+{
+    margin-bottom: 20px;
+}
+
+.event
+{
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #FFFFFF;
+    font-size: .9em;
+    margin: 0px 30px;
+    padding: 2px 0px;
+}
+
+    .event.listening
+    {
+        background-color: #333333;
+        display: block;
+    }
+
+    .event.received
+    {
+        background-color: #4B946A;
+        display: none;
+    }
+
+@keyframes fade
+{
+    from
+    {
+        opacity: 1.0;
+    }
+
+    50%
+    {
+        opacity: 0.4;
+    }
+
+    to
+    {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes fade
+{
+    from
+    {
+        opacity: 1.0;
+    }
+
+    50%
+    {
+        opacity: 0.4;
+    }
+
+    to
+    {
+        opacity: 1.0;
+    }
+}
+
+.blink
+{
+    animation: fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
+}
+
+.MasterTemplate
+{
+    display: none;
+}
+
+.ui-loader
+{
+    background-color: #EEE;
+}
+
+/*******Home Page*********************/
+
+.CompanyReport
+{
+    vertical-align: central !important;
+}
+/*************************************/
+
+.page-bar
+{
+    max-width: 546px;
+    width: 27%;
+    padding: 0;
+    background: #fff url(../img/bg_list_main.png) repeat-y top left;
+    background-size: 100% 40px;
+    height: 100%;
+    float: left;
+}
+
+.list-title
+{
+    background-color: transparent !important;
+    border-color: -moz-use-text-color #A8AAAA !important;
+    border-left: 1px solid #A8AAAA !important;
+    border-right: 1px solid #A8AAAA !important;
+    border-style: none solid !important;
+    border-width: 0 1px !important;
+    height: 87px;
+    line-height: 2.8em;
+    margin: 0 auto 10px;
+    padding: 0 20%;
+    text-align: center;
+    width: 40%;
+    font-size: 2em;
+}
+
+.button-container
+{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.darken
+{
+    width: 100%;
+    background: transparent url(../img/bg_darker.png) repeat top left;
+    padding: 10px 0 3px 0;
+}
+
+table.tabs
+{
+    height: 100%;
+}
+
+.SideBar
+{
+    max-width: 33%;
+    min-width: 350px;
+    background: transparent url('../img/bg_list_main.png') repeat-y left top;
+    background-size: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    float: left;
+    vertical-align: top;
+}
+
+
+    .SideBar h1, .sideBarTitle h1
+    {
+        height: 50px;
+        text-align: center;
+        width: 73%;
+        max-width: 396px;
+        border-left: 1px solid Gray;
+        border-right: 1px solid Gray;
+        margin: 11px auto;
+        line-height: 1.2em;
+    }
+
+/*****Home page*****************/
+
+/*****Questions page************/
+
+.Questions
+{
+    /*-webkit-overflow-scrolling: touch;    */
+    vertical-align: top;    
+    width: 63.5%;
+}
+
+    .Questions ul
+    {
+        list-style-type: none;
+        margin-left: 6px;
+    }
+
+        .Questions ul li
+        {
+            border-bottom: solid 1.5px #e5e5e5;
+        }
+
+.QuestionText
+{
+    font-weight: bold;
+    font-size: small;
+    padding-top: 2%;
+}
+
+.QuestionsList
+{
+    padding: 0px;
+}
+
+.Categories
+{
+    vertical-align: top;
+}
+
+.CategoryNumber
+{
+    background: transparent url(../img/bg_list_number.png) no-repeat center center;
+    background-size: contain;
+    font-size: 2em;
+    color: white;
+    width: 58px;
+    height: 58px;
+    float: left;
+    text-align: center;
+    line-height: 58px;
+    margin-left: 5px;
+    font-weight: 100;
+}
+
+.CategoryDescription
+{
+    font-size: smaller;
+    font-style: italic;
+    color: gray;
+    font-weight: lighter;
+}
+
+#ulSubCategories
+{
+    margin: 0px;
+    padding: 10px;
+}
+
+.SubCategory
+{
+    margin: 0px;
+    padding-right: 15px;
+}
+
+/*.SubCategoryTitle
+{
+    font-size: large;
+    font-weight: 700;
+    border-bottom: solid 1.5px #e5e5e5;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+*/
+.AnswerOptions
+{
+    padding-bottom: 1%;
+}
+
+    .AnswerOptions div
+    {
+        float: left;
+        width: 19%;
+        text-align: left;
+        font-size: small;
+    }
+
+        .AnswerOptions div:first-child
+        {
+        }
+
+.AnswerOption
+{
+    font-size: small;
+    padding-right: 1%;
+}
+
+.ui-slider-input
+{
+    float: right !important;
+    outline: none !important;
+}
+
+.ui-slider-track
+{
+    margin-bottom: 0px !important;
+    margin-left: 0px !important;
+    margin-right: 75px !important;
+    margin-top: 0px !important;
+}
+/*******************************/
+.ReportSideBar
+{
+    width: 42%;
+    max-width: 782%;
+    background-color: #e6e6e6;
+    height: 100%;
+    padding: 0 3%;
+    border-top: solid 10px #f7f7f7;
+    line-height: 1.4;
+}
+
+    .ReportSideBar table
+    {
+        table-layout: fixed;
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+        .ReportSideBar table tr td:first-child
+        {
+            width: 50%;
+            text-align: left;
+        }
+
+        .ReportSideBar table tr td
+        {
+            text-align: center;
+        }
+
+.CompanyName
+{
+    padding-top: 10px;
+}
+
+.dates
+{
+    line-height: 1em;
+}
+
+#ulCompanies .ui-btn-up-a, #ulCategories .ui-btn-up-a
+{
+    background: transparent !important;
+    border: none !important;
+}
+
+    #ulCompanies .ui-btn-up-a:hover, #ulCategories .ui-btn-up-a:hover
+    {
+        background: transparent url(../img/bg_darker.png) repeat top left !important;
+        border: none !important;
+    }
+
+#ulCompanies li, #ulCategories li
+{
+    float: left;
+    width: 100%;
+    margin-bottom:3px;
+}
+
+.MasterTemplate
+{
+    background: transparent none !important;
+    display: none;
+}
+
+    .MasterTemplate:hover
+    {
+        border: none !important;
+        background: transparent none !important;
+        text-shadow: none !important;
+    }
+
+#ulCompanies, #ulCategories
+{
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    width: 97%;
+    font-size: .8em;
+    overflow-x: hidden !important;
+}
+
+#ulCompanies
+{
+    height: 380px !important;
+}
+    #ulCompanies h2, #ulCategories h2
+    {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin: 0;
+        line-height: 1.3em;
+    }
+
+    #ulCompanies a, #ulCategories a
+    {
+        text-decoration: none;
+        font-weight: normal;
+        color: #2d353a;
+    }
+
+    #ulCompanies li:hover, #ulCategories li:hover
+    {
+        background: transparent url(../img/bg_darker.png) repeat top left;
+    }
+
+.arrow-right
+{
+    float: right;
+    max-width: 17px;
+    width: 4.5%;
+    margin: 25px 10px auto 0;
+}
+
+.CategoryDiscription, .CategoryContent
+{
+    width: 80%;
+    padding: 0px 10px 10px 20%;
+    line-height: 1em;
+}
+
+
+.ReportTitle
+{
+    border-bottom: 1px solid #CECECE;
+    margin: 0 auto;
+    width: 95%;
+}
+
+    .ReportTitle h1
+    {
+        line-height: 1em;
+        padding-top: 10px;
+    }
+
+.reportSummary
+{
+    width: 40%;
+    margin: 15px 0 20px 2%;
+    font-size: 1em;
+    border-spacing: 0;
+    border-collapse: collapse;
+    float: left;
+}
+
+
+.ReportSideBar tr:first-child td
+{
+    border-bottom: 1px solid #bababa;
+}
+
+.ReportInfo
+{
+    float: left;
+    margin: 20px 0 0 20px;
+    width: 50%;
+    line-height: 1em;
+}
+
+#tabHome, #tabQuestions, #tabReport, #tabAbout
+{
+    -webkit-transform: translate3d(0px,0px,0px);
+    -webkit-overflow-scrolling: touch;
+    background: url(../img/bg.png) repeat-x white;
+    background-position: bottom;
+    z-index: 1;
+}
+
+    #tabQuestions table
+    {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+.AnswerOptions
+{
+    display: block;
+    overflow: auto;
+}
+
+.AnswerOption
+{
+    line-height: 1em;
+}
+
+.titleDiv
+{
+    position: fixed;
+    top: 0;
+    float: left;
+    width: 94%;
+    height: 72px;
+    overflow: hidden;
+    left: 5%;
+    background-color: #f7f7f7;
+    z-index: 5;
+}
+
+    .titleDiv div
+    {
+        float: left;
+    }
+
+.sideBarTitle
+{
+    width: 26.5%;
+    max-width: 544px;
+    background: transparent url(../img/bg_darker.png) repeat top left;
+    overflow: hidden;
+}
+
+.workSpaceTitle
+{
+    width: 73.5%;
+}
+
+.aboutInfo
+{
+    height: 100%;
+    width: 94%;
+}
+
+.note
+{
+    color: #145279;
+}
+
+.aboutInfo
+{
+    padding: 15px;
+    font-size: smaller;
+}
+/***Disable slow css************
+* {
+text-shadow: none !important;
+-webkit-box-shadow: none !important;
+-webkit-border-radius:0 !important;
+-webkit-border-top-left-radius:0 !important;
+-webkit-border-bottom-left-radius:0 !important;
+-webkit-border-bottom-right-radius:0 !important;
+-webkit-border-top-right-radius:0 !important;
+}
+    */
+
+/***********GAP**********/
+.GapIcon
+{
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+}
+
+.redGapIcon
+{
+    background-color: red;
+    background-image: linear-gradient(#f00, #680000);
+}
+
+.greenGapIcon
+{
+    background-color: green;
+    background-image: linear-gradient(#0F0, #086504);
+}
+
+.yellowGapIcon
+{
+    background-color: yellow;
+    background-image: linear-gradient(#ff0, rgb(184, 181, 44));
+}

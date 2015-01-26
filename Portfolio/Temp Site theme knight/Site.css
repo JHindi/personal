@@ -1,0 +1,322 @@
+﻿@font-face {
+    font-family: 'poorRichard';
+    src: url('fonts/POORICH.TTF');
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('fonts/HelveticaNeueLTPro-Lt.otf');
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'HelveticaNeue','Helvetica',Arial;
+    color: #282828;
+    text-align: center;
+    background: -moz-linear-gradient(left,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.1)), color-stop(10%,rgba(0,0,0,0)), color-stop(90%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#1a000000',GradientType=1 ); /* IE6-9 */
+}
+
+header {
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    color: white;
+    height: 87px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 1s ease;
+    overflow:hidden;
+}
+
+    header h1 {
+         font-family: 'poorRichard','HelveticaNeue','Helvetica',Arial;
+         font-size: 3em;
+         width:49%;
+         font-weight:100;
+         margin:0;
+         padding:15px 0;
+         line-height:1em;
+         overflow:hidden;
+    }
+
+h2{
+font-family: 'poorRichard','HelveticaNeue','Helvetica',Arial;
+font-size:2em;
+}
+
+.widthWrapper {
+    text-align: left;
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sectionDivider {
+    border-bottom: 2px solid #84c68a;
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
+}
+.right {
+    float:right !important;
+}
+.left {
+    float:left !important;
+}
+
+/* ---------------- Nav ----------------*/
+
+.nav {
+    width:422px;
+    text-align:center;
+    height:100%;
+}
+    header .widthWrapper {
+        height:100%;
+    }
+    .nav div {
+        border-bottom:solid 2px rgba(55,167,71,.8);
+        color:white;
+        position:relative;
+        top:23px;
+        padding:10px 15px;
+        cursor:pointer;
+        transition: all 500ms ease;
+        float:left;
+        margin-right:25px;
+        border-radius: 5px 5px 0 0;
+}
+        .nav div.hireMe {
+            margin-right:0;
+        }
+        
+        .nav div.selected {
+            background-color:rgba(55,167,71,.1);
+        }
+        
+        .nav div:hover, .nav div.selected:hover {
+            background-color:rgba(55,167,71,.3);
+        }
+
+
+/* ---------------- about/home page settings ----------------*/
+.homepageHero {
+    width: 100%;
+    padding: 123px 0 41px 0;
+    color: #282828;
+}
+
+.heroOverlay {
+    position: relative;
+    padding: 3%;
+    background-color: rgba(255,255,255,.8);
+    border-radius: 5px;
+    overflow: auto;
+    width: 91%;
+    margin: 0 auto;
+    transition: all 1s ease;
+    opacity:1;
+    top:0;
+}
+
+    .heroOverlay p {
+        font-size: 1.5em;
+    }
+
+.heroBig {
+    font-size: 1.8em;
+}
+
+.headerSmall {
+    font-size: 1em !important;
+}
+
+.heroMonitor {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-right: 3%;
+    transition: all .8s .3s ease;
+    float: left;
+    max-width:45%;
+}
+
+.heroPhone {
+    position: absolute;
+    bottom: 15px;
+    left: 50px;
+    transition: all .8s .4s ease;
+}
+
+.uxKnight {
+    width: 100%;
+    padding: 50px 0;
+    transition: all 1s 500ms ease;
+    opacity:1;
+    top:0;
+}
+    .uxKnight .widthWrapper {
+        position:relative;
+        overflow:visible;
+    }
+
+
+.knight {
+    position:absolute;
+    right:-67px;
+    top:-41px;
+    z-index:-1;
+}
+
+.headshot {
+    float:left;
+    margin-right:3%;
+    width:16%;
+}
+
+.homeBlurb {
+    float:left;
+    width:80%;
+    z-index:1;
+}
+.expereince {
+    float:left;
+    width:48%;
+}
+
+#slide1:before {
+    background-image: url("Images/castel.jpg");
+    background-attachment: fixed;
+    z-index: -1;
+}
+/* ---------------- about/home page settings ----------------*/
+.portfolioNav {
+    background-color:rgba(255,255,255,.8);
+    position:relative;
+    margin-top:82px;
+    padding-top:15px;
+    box-shadow:0 3px 3px rgba(0,0,0,.4);
+}
+
+
+/* ---------------- animation preloaded settings ----------------*/
+
+.preload {
+    left: -110% !important;
+}
+
+.slideInTop {
+    top:-100px;
+}
+.fadein {
+    opacity:0;
+    top:50px;
+}
+
+/* ---------------- background fixed ----------------*/
+
+.slide {
+    position: relative;
+    box-sizing: border-box;
+    transform-style: inherit;
+}
+
+    .slide, .slide:before {
+        background: 50% 50% / cover;
+    }
+
+        .slide:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+
+/* ---------------- Responsivness ----------------*/
+@media screen and (max-width:780px) {
+    .heroMonitor, .heroPhone{
+        display:none;
+    }
+    .heroOverlay p {
+        margin-top:0;
+    }
+    .expereince {
+        width:100%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .headshotEnvelop {
+        text-align:center;
+    }
+    .headshot {
+        float:none;
+        width:auto;
+    }
+    .homeBlurb {
+        width:100%;
+    }
+    .knight {
+        top:66%;
+    }
+}
+
+@media screen and (max-width:925px) {
+    header {
+        overflow:visible;
+    }
+    .nav {
+        width:60px;
+        padding-top:33px;
+        height:0;     
+        cursor:pointer;
+    }
+        .nav:before {
+            content:"menu";
+        }
+
+        .nav section {
+            background-color:rgba(0,0,0,.8);
+            position:absolute;
+            right:-185px;
+            top:88px;
+            width:160px;
+            transition:all .5s ease;
+        }
+    .showMenu {
+        right:0 !important;
+    }
+    .nav div {
+        border-bottom:solid 2px rgba(55,167,71,.8);
+        color:white;
+        position:relative;
+        top:0px;
+        padding:10px 0px;
+        cursor:pointer;
+        transition: all 500ms ease;
+        float:left;
+        margin-right:0px;
+        border-radius:0;
+        width:100%;
+}     
+}
